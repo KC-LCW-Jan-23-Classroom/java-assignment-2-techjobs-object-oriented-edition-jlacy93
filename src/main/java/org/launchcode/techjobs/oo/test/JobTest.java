@@ -43,4 +43,37 @@ public class JobTest {
     assertFalse(jobOne.equals((jobTwo)));
     }
 
+    @Test
+    public void testToStringStartsAndEndsWithNewLine(){
+        Job testJob = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        int lastChar = testJob.toString().length();
+        String toString = testJob.toString();
+        Assert.assertEquals(toString.charAt(0), '\n');
+        Assert.assertEquals(toString.charAt(lastChar-1), '\n');
+    }
+
+    @Test
+    public void testToStringContainsCorrectLabelsAndData(){
+        Job testJob = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        String toStringTest = "\nID: " + testJob.getId() +
+                "\nName: " + "Product tester" +
+                "\nEmployer: " + "ACME" +
+                "\nLocation: " + "Desert" +
+                "\nPosition Type: " + "Quality control" +
+                "\nCore Competency: " + "Persistence\n";
+        Assert.assertEquals(testJob.toString(),toStringTest);
+    }
+
+    @Test
+    public void testToStringHandlesEmptyField(){
+        Job testJob = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency(""));
+        String toStringTest = "\nID: " + testJob.getId() +
+                "\nName: " + "Product tester" +
+                "\nEmployer: " + "ACME" +
+                "\nLocation: " + "Desert" +
+                "\nPosition Type: " + "Quality control" +
+                "\nCore Competency: " + "Data not available\n";
+        Assert.assertEquals(testJob.toString(),toStringTest);
+    }
+
 }

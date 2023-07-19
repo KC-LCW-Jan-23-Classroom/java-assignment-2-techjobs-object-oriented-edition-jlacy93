@@ -94,4 +94,25 @@ public class Job {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    @Override
+    public String toString(){
+        String toName = checkEmptyValues(getName());
+        String toEmployer = checkEmptyValues(getEmployer().getValue());
+        String toLocation = checkEmptyValues(getLocation().getValue());
+        String toPositionType = checkEmptyValues(getPositionType().getValue());
+        String toCoreCompetency = checkEmptyValues(getCoreCompetency().getValue());
+
+        return "\nID: " + getId() + "\nName: " + toName + "\nEmployer: " + toEmployer + "\nLocation: " + toLocation + "\nPosition Type: " + toPositionType + "\nCore Competency: " + toCoreCompetency + "\n";
+    }
+
+    public String checkEmptyValues(String value){
+        if(value.isEmpty()){
+            return "Data not available";
+        } else {
+            return value;
+        }
+    }
+
+
 }
